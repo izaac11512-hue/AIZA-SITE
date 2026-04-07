@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIZA | Digital Uniform</title>
+    <style>
+        /* RESET & VARIABLES MINIMALISTAS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --accent-color: #00ff9f; /* Verde digital */
+            --gray-light: #f5f5f5;
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-mono: 'Courier New', Courier, monospace; /* Toque digital/Win95 */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HEADER PREMIUM */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .header-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .header-links a:hover {
+            color: var(--accent-color);
+            text-shadow: 1px 0px 0px rgba(0,0,0,0.2);
+        }
+
+        /* HERO - GALERÍA DIGITAL */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: var(--bg-color);
+        }
+        .hero-logo {
+            font-size: 8rem;
+            font-weight: 900;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        /* Efecto Glitch Suave en Hover */
+        .hero-logo:hover {
+            text-shadow: 3px 0px 0px var(--accent-color), -3px 0px 0px #ff00ea;
+        }
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            margin-bottom: 40px;
+            color: #555;
+        }
+        .btn-group {
+            display: flex;
+            gap: 20px;
+        }
+        .btn-outline {
+            border: 1px solid var(--text-color);
+            background: transparent;
+            color: var(--text-color);
+            padding: 12px 30px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+            box-shadow: 4px 4px 0px var(--accent-color); /* Toque brutalista/digital */
+        }
+
+        /* SECCIÓN PRODUCTOS - GRID LIMPIO */
+        .shop {
+            padding: 120px 5%;
+            background-color: var(--bg-color);
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px; /* Mucho espacio vacío */
+        }
+        .product-card {
+            background: var(--gray-light);
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            mix-blend-mode: multiply; /* Para que el fondo de la imagen se funda con el gris */
+            transition: all 0.5s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        .product-card:hover img {
+            transform: scale(1.05);
+            filter: hue-rotate(90deg) saturate(200%); /* Glitch de color en hover */
+        }
+        .product-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        .product-info span { font-weight: bold; }
+
+        /* ARTE / IDENTIDAD */
+        .art-section {
+            padding: 120px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            background-color: var(--bg-color);
+        }
+        .art-image {
+            width: 100%;
+            filter: grayscale(100%);
+            border: 1px solid #eee;
+        }
+        .art-text h2 {
+            font-size: 3rem;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+        .art-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 400px;
+        }
+
+        /* BANNER DROP LIMITADO */
+        .drop-banner {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .drop-banner h2 {
+            font-size: 4rem;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+        .drop-banner h2 span {
+            color: var(--accent-color);
+        }
+        .btn-solid {
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 15px 40px;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .btn-solid:hover {
+            background: var(--accent-color);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 5%;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .art-section { grid-template-columns: 1fr; }
+            .hero-logo { font-size: 5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="font-weight: 900; letter-spacing: 2px;">AIZA.</div>
+        <div class="header-links">
+            <a href="#shop">SHOP</a>
+            <a href="#art">ABOUT</a>
+            <a href="#">CART [0]</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-logo">AIZA</div>
+        <div class="hero-subtitle">DIGITAL UNIFORM</div>
+        <div class="btn-group">
+            <a href="#shop" class="btn-outline">[ SHOP ]</a>
+            <a href="#art" class="btn-outline">[ ENTER ]</a>
+        </div>
+    </section>
+
+    <section class="shop" id="shop">
+        <div class="section-header">
+            <h2 class="section-title">LATEST DROP</h2>
+            <span style="font-family: var(--font-mono); color: #888;">001_COLLECTION</span>
+        </div>
+        
+        <div class="grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop" alt="T-Shirt">
+                <div class="product-info">
+                    <p>SYSTEM_TEE</p>
+                    <span>$850 MXN</span>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" alt="Hoodie">
+                <div class="product-info">
+                    <p>BLANK_HOODIE</p>
+                    <span>$1,400 MXN</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="art-section" id="art">
+        <img src="https://images.unsplash.com/photo-1543164911-30eb8a78e727?q=80&w=800&auto=format&fit=crop" alt="Digital Statue" class="art-image">
+        <div class="art-text">
+            <h2>Designed for a <br> disconnected reality.</h2>
+            <p>Streetwear convertido en arte digital minimalista. No es para todos, es una exhibición para quienes entienden el código.</p>
+            <a href="#shop" class="btn-outline">[ VIEW GALLERY ]</a>
+        </div>
+    </section>
+
+    <section class="drop-banner">
+        <h2>LIMITED <span>RELEASE</span></h2>
+        <p style="font-family: var(--font-mono); margin-bottom: 30px; color: #ccc;">ONLY ONLINE. NO RESTOCKS.</p>
+        <a href="#shop" class="btn-solid">SHOP DROP 001</a>
+    </section>
+
+    <footer>
+        <p>AIZA © 2026. RUNNING ON EMPTY.</p>
+    </footer>
+
+</body>
+</html>
